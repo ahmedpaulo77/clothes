@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 const proxy = { "/functions/v1/app": "http://127.0.0.1:8000" };
 
 export default defineConfig({
+  base: "/clothes/",
   plugins: [react()],
   resolve: { alias: { "@": fileURLToPath(new URL(".", import.meta.url)) } },
   server: { host: "127.0.0.1", proxy },

@@ -7,7 +7,8 @@ import { HomePage, ShopPage, ProductPage, AboutPage, ContactPage, CartPage, NotF
 import { products } from './catalog';
 
 function RouteEffects() {
-  const { pathname } = useLocation();
+  const { pathname: currentPathname } = useLocation();
+  const pathname = currentPathname.replace(/\/+$/, '') || '/';
   useEffect(() => {
     const titles: Record<string, string> = { '/': 'Everyday, considered', '/shop': 'Shop the collection', '/about': 'Our story', '/contact': 'Get in touch', '/cart': 'Your bag' };
     const product = products.find(item => pathname === `/product/${item.id}`);
@@ -19,7 +20,7 @@ function RouteEffects() {
 }
 
 export default function App() {
-  return <BrowserRouter><StoreProvider>
+  return <BrowserRouter basename={import.meta.env.BASE_URL}><StoreProvider>
     <a className="skip-link" href="#main-content">Skip to content</a>
     <RouteEffects />
     <Header />
